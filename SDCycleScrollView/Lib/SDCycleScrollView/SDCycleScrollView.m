@@ -547,11 +547,11 @@ NSString * const ID = @"cycleCell";
     NSString *imagePath = self.imagePathsGroup[itemIndex];
     
     if (!self.onlyDisplayText && [imagePath isKindOfClass:[NSString class]]) {
-        if ([imagePath hasPrefix:@"http"]) {
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage];
-        } else if([imagePath hasPrefix:@"https"]){
+        if([imagePath hasPrefix:@"https"]){
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage options:SDWebImageAllowInvalidSSLCertificates];
-        }else {
+        } else if ([imagePath hasPrefix:@"http"]) {
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:self.placeholderImage];
+        } else {
             UIImage *image = [UIImage imageNamed:imagePath];
             if (!image) {
                 [UIImage imageWithContentsOfFile:imagePath];
